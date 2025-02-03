@@ -1,13 +1,3 @@
-import React from 'react'
-
-const APIReferencepage = () => {
-  return (
-    <div>APIReferencepage</div>
-  )
-}
-
-export default APIReferencepage
-
 import React from 'react';
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
