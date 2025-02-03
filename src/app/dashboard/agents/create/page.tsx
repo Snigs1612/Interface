@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Define TypeScript types
 interface UploadedFile {
@@ -16,7 +17,7 @@ interface UploadedFile {
 
 interface Datastore {
   name: string;
-  id: string; // Unique identifier for each datastore (e.g., an ID)
+  id: string; 
 }
 
 interface CreateAgentPageProps {
@@ -41,6 +42,28 @@ export default function CreateAgentPage({ uploadedFiles = [] }: CreateAgentPageP
     setDatastores(fetchedDatastores);
   }, []);
 
+  const handleCreate = () => {
+    // Save agent data to localStorage
+    const agentData = {
+      agentName,
+      description,
+      systemPrompt,
+      datastore: createDatastore ? "New Datastore" : selectedDatastore,
+    };
+    localStorage.setItem("createdAgent", JSON.stringify(agentData));
+
+    const toastId = toast.success("Agent created successfully!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      className: "!max-w-xs !rounded-lg", 
+    });
+
+    setTimeout(() => {
+      router.push("/dashboard/agents"); 
+    }, 2000); 
+  };
+
   return (
     <div className="p-6 w-full mx-auto">
       <button onClick={() => router.back()} className="text-gray-500 hover:underline mb-4">
@@ -48,8 +71,6 @@ export default function CreateAgentPage({ uploadedFiles = [] }: CreateAgentPageP
       </button>
       <h1 className="text-2xl font-semibold">Create Agent</h1>
       <p className="text-gray-500 mb-6">Create an agent to start using the RAG system.</p>
-
-      
 
       {/* General Information */}
       <div className="flex justify-between mt-6 border border-gray-300 rounded-2xl bg-gray-100 p-4">
@@ -131,8 +152,22 @@ export default function CreateAgentPage({ uploadedFiles = [] }: CreateAgentPageP
         </Card>
       </div>
 
-      {/* Submit Button */}
-      <Button className="mt-6 w-full">Create Agent</Button>
+      <div className="flex justify-end mt-3">
+        <button
+          onClick={handleCreate}
+          className="px-4 py-2 text-white bg-black rounded-full"
+        >
+          Create
+        </button>
+      </div>
+
+      <ToastContainer 
+        position="bottom-right" 
+        autoClose={2000} 
+        hideProgressBar 
+        className="!mb-10" 
+        toastClassName="!max-w-xs !rounded-lg !bg-black !text-white" 
+      />
     </div>
   );
 }

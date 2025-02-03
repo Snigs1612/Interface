@@ -39,9 +39,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     {
       label: "Admin",
       items: [
-        { title: "API Keys", url: "/dashboard/api-keys", icon: Key },
-        { title: "Admin Settings", url: "/dashboard/admin-settings", icon: Settings },
-        { title: "Global Settings", url: "/dashboard/global-settings", icon: Layers },
+        { title: "API Keys", url: "/dashboard/admin/api-keys", icon: Key },
+        { title: "Admin Settings", url: "/dashboard/admin/admin-settings", icon: Settings },
+        { title: "Global Settings", url: "/dashboard/admin/global-settings", icon: Layers },
       ],
     },
     {
@@ -71,8 +71,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                             className="flex items-center gap-2 w-full text-left"
                             aria-label={item.title}
                             onClick={() => {
-                              setBreadcrumb(item.title); // ✅ Update breadcrumb
-                              router.push(item.url); // ✅ Navigate to the selected page
+                              setBreadcrumb(item.title); 
+                              router.push(item.url); 
                             }}
                           >
                             <item.icon className="w-5 h-5" />

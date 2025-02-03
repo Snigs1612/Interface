@@ -1,0 +1,66 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API References",
+      "description": "Explore our API documentation and playground.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+      "/dashboard/agents": {
+        "get": {
+          "summary": "Get all agents",
+          "responses": {
+            "200": {
+              "description": "List of agents",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "name": { "type": "string" },
+                        "status": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/dashboard/datastores": {
+        "get": {
+          "summary": "Get all datastores",
+          "responses": {
+            "200": {
+              "description": "List of datastores",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "type": { "type": "string" },
+                        "location": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
